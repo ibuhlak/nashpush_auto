@@ -14,12 +14,7 @@ def page():
         USER_DATA_DIR,
         headless=False,
         args=[
-            "--no-sandbox",
-            "--disable-dev-shm-usage",
-            "--disable-background-timer-throttling",
-            "--disable-renderer-backgrounding",
-            "--disable-backgrounding-occluded-windows",
-            "--enable-features=PushMessaging"
+            "--no-sandbox"
         ]
     )
     browser_context.grant_permissions(["notifications"])
@@ -114,16 +109,14 @@ def test_push_message(page):
                 pytest.fail(f"Ошибка при парсинге JSON-ответа: {e}")
  
     page.context.on("request", handle_request)
-    page.wait_for_timeout(600000)
 
-
-    # minutes = 0
-    # while request_data == {} and minutes < 20:
-    #     page.mouse.move(200, 100)
-    #     page.wait_for_timeout(60000)
-    #     minutes += 1
-    #     print(f"waiting for {minutes} minutes")
-    #     page.mouse.move(100, 200)
+    minutes = 0
+    while request_data == {} and minutes < 11:
+        page.mouse.move(200, 100)
+        page.wait_for_timeout(60000)
+        minutes += 1
+        print(f"waiting for {minutes} minutes")
+        page.mouse.move(100, 200)
 
     assert request_data, f"Request data is empty, request was not sent = {request_data}"
     print(f"тело реквеста: {request_data}")
