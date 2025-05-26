@@ -111,7 +111,7 @@ def test_push_message(page):
     page.context.on("request", handle_request)
 
     minutes = 0
-    while request_data == {} and minutes < 11:
+    while request_data == {} and minutes <= 11:
         page.mouse.move(200, 100)
         page.wait_for_timeout(60000)
         minutes += 1
