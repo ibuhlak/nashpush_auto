@@ -1,4 +1,5 @@
 import os
+import re
 import shutil
 import pytest
 from data.config import Config
@@ -106,28 +107,24 @@ def test_push_notification_subscription(page):
     
 # Тест 3: Проверяем, что пришло уведомление
 def test_push_message(page):
-    request_data = {}
+    timestamp_found = {"value": None}
 
-    def handle_request(request):
-        if request.url.endswith("callbacks/") and request.method == "POST":
-            try:
-                json_body = request.post_data_json
-                request_data.update(json_body)
-            except Exception as e:
-                pytest.fail(f"Ошибка при парсинге JSON-ответа: {e}")
- 
-    page.context.on("request", handle_request)
+    def handle_console(msg):
+        text = msg.text.strip()
+        # Проверим, что строка состоит только из 13 цифр (мс timestamp)
+        if re.match(r"^\d{13}$", text):
+            timestamp_found["value"] = text
+            print(f"✅ Получено уведомление в {text}")
 
-    minutes = 0
-    while request_data == {} and minutes <= 5:
-        page.mouse.move(200, 100)
-        page.wait_for_timeout(60000)
-        minutes += 1
-        print(f"waiting for {minutes} minutes")
-        page.mouse.move(100, 200)
+    page.context.on("console", handle_console)
 
-    assert request_data, f"Request data is empty, request was not sent = {request_data}"
-    print(f"тело реквеста: {request_data}")
+    for _ in range(300):  # ждём максимум 5 минуты
+        if timestamp_found["value"]:
+            break
+        page.mouse.move(150, 150)
+        page.wait_for_timeout(1000)
+
+    assert timestamp_found["value"], "❌ Уведомление не пришло — timestamp не зафиксирован"
 
 # Тест 4: Эмулируем блок на подписку и проверяем что ушел постбек
 def test_blocked_page(page):
