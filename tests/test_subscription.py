@@ -106,25 +106,28 @@ def test_push_notification_subscription(page):
         f.write(f'uuid = "{response_data.get("uuid")}"\n')
     
 # Тест 3: Проверяем, что пришло уведомление
-def test_push_message(page):
-    timestamp_found = {"value": None}
+def test_push_received_by_callback(page):
+    print("⏳ Ждём POST-запрос на callbacks/")
 
-    def handle_console(msg):
-        text = msg.text.strip()
-        # Проверим, что строка состоит только из 13 цифр (мс timestamp)
-        if re.match(r"^\d{13}$", text):
-            timestamp_found["value"] = text
-            print(f"✅ Получено уведомление в {text}")
+    def is_callback_post_request(request):
+        return request.url.startswith("https://callbacks-api.staging.push-sender.com/api/v1/subscribers/") \
+            and request.url.endswith("/callbacks/") and request.method == "POST"
 
-    page.context.on("console", handle_console)
+    with page.expect_request(is_callback_post_request, timeout=120_000) as request_info:
+        # Эмулируем активность, чтобы триггерить доставку пуша
+        for _ in range(10):
+            page.mouse.move(200, 100)
+            page.wait_for_timeout(1000)
 
-    for _ in range(300):  # ждём максимум 5 минуты
-        if timestamp_found["value"]:
-            break
-        page.mouse.move(150, 150)
-        page.wait_for_timeout(1000)
+    request = request_info.value
 
-    assert timestamp_found["value"], "❌ Уведомление не пришло — timestamp не зафиксирован"
+    try:
+        request_data = request.post_data_json
+    except Exception as e:
+        pytest.fail(f"Ошибка при получении тела запроса: {e}")
+
+    assert request_data, "❌ Колбэк-пост не был отправлен"
+    print(f"✅ Уловили POST на callbacks/: {request_data}")
 
 # Тест 4: Эмулируем блок на подписку и проверяем что ушел постбек
 def test_blocked_page(page):
