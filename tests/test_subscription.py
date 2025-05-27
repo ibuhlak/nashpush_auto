@@ -54,6 +54,7 @@ def test_push_notification_subscription(page):
     
     subscriber_request = None
     response_data = {}
+    found_messages = False
 
     def handle_response(response):
         nonlocal subscriber_request
@@ -65,6 +66,12 @@ def test_push_notification_subscription(page):
             except Exception as e:
                 pytest.fail(f"Ошибка при парсинге JSON-ответа от подписчиков: {e}")
 
+    def handle_console(msg):
+        nonlocal found_messages
+        if "subscribed" in msg.text:
+            found_messages = True
+
+    page.on("console", handle_console)
     page.on("response", handle_response) 
     page.goto(Config.SUBSCRIPTION_URL, wait_until="networkidle")
 
@@ -90,6 +97,7 @@ def test_push_notification_subscription(page):
     page.wait_for_timeout(5000)  # Даем больше времени для обработки запроса
 
     # Проверяем, был ли отправлен запрос на подписку
+    assert found_messages, "Не найдено сообщений в консоли с текстом 'subscribed'. Возможно, подписка не была успешно выполнена."
     assert subscriber_request is not None, "Не дождались subscribers request"
     assert response_data["uuid"], f"Поле 'uuid' пустое или отсутствует. Ответ: {response_data}"
 
@@ -111,7 +119,7 @@ def test_push_message(page):
     page.context.on("request", handle_request)
 
     minutes = 0
-    while request_data == {} and minutes <= 11:
+    while request_data == {} and minutes <= 5:
         page.mouse.move(200, 100)
         page.wait_for_timeout(60000)
         minutes += 1
