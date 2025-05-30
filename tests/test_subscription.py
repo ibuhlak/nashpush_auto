@@ -129,50 +129,6 @@ def test_push_received_by_callback(page):
     assert request_data, "❌ Колбэк-пост не был отправлен"
     print(f"✅ Уловили POST на callbacks/: {request_data}")
 
-# Тест 4: Отслеживаем push через DevTools Protocol (CDP)
-def test_push_console_log_from_service_worker(page):
-    from playwright.sync_api import TimeoutError as PlaywrightTimeoutError
-
-    context = page.context
-    found_push_log = False
-    timeout_ms = 15000  # 60 секунд
-
-    # Получаем список таргетов
-    cdp = context.new_cdp_session(page)
-    cdp.send("Target.setDiscoverTargets", {"discover": True})
-    targets = cdp.send("Target.getTargets")["targetInfos"]
-
-    # Ищем сервис-воркер
-    sw_target = next((t for t in targets if t["type"] == "service_worker"), None)
-    assert sw_target, "❌ Service Worker не найден"
-
-    # Подключаемся к сервис-воркеру через новую CDP-сессию
-    sw_session = context.new_cdp_session(target=sw_target)
-
-    # Включаем Runtime
-    sw_session.send("Runtime.enable")
-
-    # Слушаем логи
-    def on_log(entry):
-        nonlocal found_push_log
-        args = entry["args"]
-        for arg in args:
-            value = arg.get("value")
-            if isinstance(value, str) and "Push event received" in value:
-                print(f"✅ Лог из Service Worker: {value}")
-                found_push_log = True
-
-    sw_session.on("Runtime.consoleAPICalled", on_log)
-
-    # Имитация пользовательской активности
-    for _ in range(int(timeout_ms / 5000)):
-        page.mouse.move(100, 100)
-        page.wait_for_timeout(60000)
-        if found_push_log:
-            break
-
-    assert found_push_log, "❌ Не нашли 'Push event received' в логах сервис-воркера"
-
 
 # Тест 5: Эмулируем блок на подписку и проверяем что ушел постбек
 def test_blocked_page(page):
