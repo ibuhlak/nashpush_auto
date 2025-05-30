@@ -1,0 +1,389 @@
+const a0G = a0b;
+(function(a, b) {
+    const v = a0b
+      , c = a();
+    while (!![]) {
+        try {
+            const d = parseInt(v(0xcf)) / 0x1 + -parseInt(v(0xb9)) / 0x2 * (parseInt(v(0xb2)) / 0x3) + parseInt(v(0x84)) / 0x4 + -parseInt(v(0xe1)) / 0x5 * (-parseInt(v(0xa2)) / 0x6) + parseInt(v(0x90)) / 0x7 + parseInt(v(0x91)) / 0x8 + -parseInt(v(0xb1)) / 0x9;
+            if (d === b)
+                break;
+            else
+                c['push'](c['shift']());
+        } catch (e) {
+            c['push'](c['shift']());
+        }
+    }
+}(a0a, 0x52d2e));
+function a0a() {
+    const a4 = ['1873400FOTeII', 'log', 'keys', 'onupgradeneeded', 'some', 'transaction', 'action', 'subscriber_id', 'management', 'Sending\x20message\x20awake...', 'onsuccess', 'get', '2972032CVaoQK', '2532696QUUQLl', 'Push\x20event\x20received:', 'text', 'addEventListener', 'toJSON', 'push', 'message_read', 'open', 'endpoint', 'openWindow', 'onerror', 'objectStore', 'Ping\x20message\x20received.\x20Sending\x20back\x20an\x20awake\x20callback\x20request', 'image', '/callbacks/', 'abort', 'auth', '12dxmCqT', 'parse', 'webpush-keyval', 'notification', 'ping', 'click_action', 'application/json', 'dropOnTheFloor', 'url', 'pushsubscriptionchange', 'button_', 'false', 'subscriber_token', 'message_clicked', 'url_redirect', '11054043rapRul', '96mLTdYT', 'https://callbacks-api.staging.push-sender.com/api/v1/subscribers/', 'put', 'null', 'waitUntil', 'close', 'data', '3526IIhNup', 'development', 'POST', 'include', 'message', 'Dropping\x20message\x20on\x20the\x20floor!!!', 'notificationclose', 'message_awake', 'oncomplete', 'error', 'message_id', 'p256dh', 'then', 'keyval', 'notificationclick', 'readonly', 'signal', 'registration', 'result', 'click_actions', 'cache', 'body', '66174lRmLeX', 'add', 'showNotification', 'getTime', 'text/plain', 'string', 'Message\x20awake', 'drop_on_the_floor', 'vibrationPattern', 'tag', 'badge', 'all', 'stringify', 'readwrite', 'click_action_data', 'true', 'createObjectStore', 'match', '870505QrOmrZ', 'getSubscription', 'Could\x20not\x20fetch\x20last\x20delivery\x20time.', 'json', 'Cache\x20is\x20empty,\x20no\x20last\x20delivery\x20time\x20mark\x20is\x20available.', 'map', 'preventDefault'];
+    a0a = function() {
+        return a4;
+    }
+    ;
+    return a0a();
+}
+function a0b(a, b) {
+    const c = a0a();
+    return a0b = function(d, e) {
+        d = d - 0x7f;
+        let f = c[d];
+        return f;
+    }
+    ,
+    a0b(a, b);
+}
+const a0c = (( () => {
+    let a;
+    function b() {
+        return !a && (a = new Promise( (d, e) => {
+            const w = a0b
+              , f = indexedDB[w(0x98)](w(0xa4), 0x1);
+            f[w(0x9b)] = () => {
+                const x = w;
+                e(f[x(0xc2)]);
+            }
+            ,
+            f[w(0x87)] = () => {
+                const y = w;
+                f['result'][y(0xdf)](y(0xc6));
+            }
+            ,
+            f[w(0x8e)] = () => {
+                d(f['result']);
+            }
+            ;
+        }
+        )),
+        a;
+    }
+    function c(d, e) {
+        return b()['then'](f => {
+            return new Promise( (g, h) => {
+                const z = a0b;
+                try {
+                    const i = f[z(0x89)](z(0xc6), d);
+                    i[z(0xc1)] = () => g(),
+                    i[z(0x9b)] = () => h(i[z(0xc2)]),
+                    e(i[z(0x9c)](z(0xc6)));
+                } catch (j) {
+                    g();
+                }
+            }
+            );
+        }
+        );
+    }
+    return {
+        'get'(d) {
+            const A = a0b;
+            let e;
+            return c(A(0xc8), f => {
+                const B = A;
+                e = f[B(0x8f)](d);
+            }
+            )[A(0xc5)]( () => {
+                const C = A;
+                return e[C(0xcb)];
+            }
+            );
+        },
+        'push'(d) {
+            const D = a0b;
+            return c(D(0xdc), e => {
+                const E = D;
+                e[E(0xd0)](d);
+            }
+            )[D(0xc5)]( () => {
+                return !![];
+            }
+            );
+        }
+    };
+}
+)())
+  , a0d = (a, b) => {
+    const F = a0b;
+    return fetch(F(0xb3), {
+        'method': F(0xbb),
+        'body': JSON[F(0xdb)]({
+            'created_type': 'on_change',
+            'from_url': null,
+            'fingerprint': null,
+            'browser_language': null,
+            'subscription': {
+                'auth': b[F(0x86)][F(0xa1)],
+                'p256dh': b[F(0x86)][F(0xc4)],
+                'endpoint': b[F(0x99)]
+            }
+        }),
+        'headers': {
+            'content-type': F(0xa8),
+            'Channel-Token': a
+        },
+        'credentials': F(0xbc)
+    });
+}
+;
+self[a0G(0x94)](a0G(0xbd), a => {
+    const H = a0G
+      , b = a[H(0xb8)];
+    let c;
+    if (b === H(0xa9))
+        c = caches[H(0x98)]('v1')[H(0xc5)](d => d['put'](H(0x8c), new Response(JSON['stringify']({
+            'drop_on_the_floor': H(0xde)
+        }),{
+            'status': 0xc8,
+            'headers': {
+                'Content-Type': H(0xa8)
+            }
+        })));
+    else
+        b === 'reset' && (c = caches[H(0x98)]('v1')[H(0xc5)](d => d[H(0xb4)](H(0x8c), new Response(JSON[H(0xdb)]({
+            'drop_on_the_floor': H(0xad)
+        }),{
+            'status': 0xc8,
+            'headers': {
+                'Content-Type': H(0xa8)
+            }
+        }))));
+    c && a['waitUntil'](c);
+}
+),
+self['addEventListener']('push', function(a) {
+    const I = a0G
+      , b = 'development'
+      , c = a[I(0xb8)][I(0x93)]()
+      , d = JSON['parse'](c);
+    b === 'development' && console[I(0x85)](I(0x92), d);
+    const e = d[I(0xa5)];
+    let f = e[I(0xb8)];
+    !f && (f = d['data']);
+    const g = f[I(0xa6)] === I(0xde);
+    let h = e['actions'];
+    !h && !g && (h = JSON[I(0xa3)](f['buttons']));
+    function i() {
+        const J = I;
+        return console['log'](J(0x9d)),
+        fetch('https://callbacks-api.staging.push-sender.com/api/v1/subscribers/' + f[J(0x8b)] + J(0x9f), {
+            'method': J(0xbb),
+            'body': JSON[J(0xdb)]({
+                'type': J(0xc0),
+                'token': f[J(0xae)],
+                'data': {
+                    'message_id': f[J(0xc3)]
+                }
+            }),
+            'headers': {
+                'content-type': J(0xd3)
+            }
+        })['then']( () => {
+            const K = J;
+            console[K(0x85)](K(0xd5));
+        }
+        );
+    }
+    function j() {
+        const L = I;
+        return fetch(L(0xb3) + f[L(0x8b)] + L(0x9f), {
+            'method': 'POST',
+            'body': JSON['stringify']({
+                'type': L(0x97),
+                'token': f[L(0xae)],
+                'data': {
+                    'message_id': f[L(0xc3)]
+                }
+            }),
+            'headers': {
+                'content-type': L(0xd3)
+            }
+        });
+    }
+    function k() {
+        const M = I;
+        return caches[M(0x98)]('v1')[M(0xc5)](q => {
+            const N = M;
+            return q[N(0xe0)](N(0xcd))[N(0xc5)](r => {
+                const O = N;
+                if (!r) {
+                    console['log'](O(0x81));
+                    return;
+                }
+                r['json']()[O(0xc5)](s => {
+                    const P = O;
+                    let t = parseInt(s['last_delivery']);
+                    if (isNaN(t)) {
+                        console[P(0x85)](P(0x7f));
+                        return;
+                    }
+                    console['log'](t),
+                    t && new Date()[P(0xd2)]() - t >= parseInt('60') * 0x3e8 && (console[P(0x85)](P(0x8d)),
+                    fetch(P(0xb3) + f[P(0x8b)] + P(0x9f), {
+                        'method': P(0xbb),
+                        'body': JSON[P(0xdb)]({
+                            'type': P(0xc0),
+                            'token': f[P(0xae)],
+                            'data': {
+                                'message_id': f[P(0xc3)]
+                            }
+                        }),
+                        'headers': {
+                            'content-type': P(0xd3)
+                        }
+                    })[P(0xc5)]( () => {
+                        const Q = P;
+                        console[Q(0x85)](Q(0xd5));
+                    }
+                    ));
+                }
+                );
+            }
+            );
+        }
+        );
+    }
+    function l() {
+        const R = I;
+        return caches[R(0x98)]('v1')[R(0xc5)](q => q[R(0xb4)](R(0xcd), new Response(JSON['stringify']({
+            'last_delivery': new Date()[R(0xd2)]()
+        }),{
+            'status': 0xc8,
+            'headers': {
+                'Content-Type': R(0xa8)
+            }
+        })));
+    }
+    function m() {
+        const S = I;
+        let q = {
+            'body': e[S(0xce)],
+            'icon': e['icon'],
+            'image': e[S(0x9e)],
+            'actions': h,
+            'tag': e[S(0xd8)],
+            'renotify': !![],
+            'requireInteraction': e['requireInteraction'],
+            'vibrate': e[S(0xd7)] ? JSON['parse'](e['vibrationPattern']) : null,
+            'data': f
+        };
+        typeof e[S(0xd9)] === S(0xd4) && !e[S(0xd9)]['includes'](S(0xb5)) && (q[S(0xd9)] = e[S(0xd9)]),
+        self[S(0xca)][S(0xd1)](e['title'], q);
+    }
+    let n;
+    b === I(0xba) ? n = new Promise(function(q, r) {
+        const T = I;
+        caches['open']('v1')[T(0xc5)](s => {
+            const U = T;
+            s[U(0xe0)]('management')[U(0xc5)](t => {
+                const V = U;
+                !t ? q({}) : t[V(0x80)]()['then'](u => {
+                    q(u);
+                }
+                );
+            }
+            );
+        }
+        );
+    }
+    ) : n = null;
+    let o, p;
+    !g ? o = [m, j, k, l] : o = [i],
+    n !== null ? a[I(0xb6)](n[I(0xc5)](q => {
+        const W = I;
+        if (q[W(0xd6)] === W(0xde)) {
+            console[W(0x85)](W(0xbe));
+            return;
+        }
+        p = o['map'](r => r()),
+        Promise[W(0xda)](p);
+    }
+    )) : (p = o[I(0x82)](q => q()),
+    a[I(0xb6)](Promise[I(0xda)](p)));
+}),
+self[a0G(0x94)](a0G(0xc7), function(a) {
+    const X = a0G;
+    a[X(0x83)]();
+    const b = a['notification'];
+    let c = b['data']
+      , d = null;
+    typeof c[X(0xcc)] === X(0xd4) && (c['click_actions'] = JSON[X(0xa3)](c['click_actions']));
+    let e = [];
+    if (!a[X(0x8a)] && c['url'] !== undefined)
+        e[X(0x96)](clients[X(0x9a)](c[X(0xaa)])),
+        d = null;
+    else {
+        if (!a[X(0x8a)])
+            c[X(0xcc)][X(0x88)](function(h) {
+                const Y = X;
+                if (!h['title'] && (h['click_action'] === Y(0xaa) || h[Y(0xa7)] === Y(0xb0)))
+                    return e[Y(0x96)](clients[Y(0x9a)](h[Y(0xdd)])),
+                    d = h[Y(0x8a)],
+                    !![];
+            });
+        else
+            a[X(0x8a)] && c['button_' + a['action']] !== undefined ? (e[X(0x96)](clients[X(0x9a)](c[X(0xac) + a[X(0x8a)]])),
+            d = a[X(0x8a)]) : c['click_actions'][X(0x88)](function(h) {
+                const Z = X;
+                if ((h[Z(0xa7)] === Z(0xaa) || h['click_action'] === Z(0xb0)) && String(h[Z(0x8a)]) === String(a[Z(0x8a)]))
+                    return e[Z(0x96)](clients['openWindow'](h[Z(0xdd)])),
+                    d = h[Z(0x8a)],
+                    !![];
+            });
+    }
+    const f = fetch(X(0xb3) + c[X(0x8b)] + X(0x9f), {
+        'method': 'POST',
+        'body': JSON[X(0xdb)]({
+            'type': X(0xaf),
+            'token': c[X(0xae)],
+            'data': {
+                'message_id': c['message_id'],
+                'action_id': d
+            }
+        }),
+        'headers': {
+            'content-type': 'text/plain'
+        }
+    });
+    e['push'](f);
+    const g = Promise[X(0xda)](e);
+    a[X(0xb6)](g),
+    b['close']();
+}),
+self[a0G(0x94)](a0G(0xbf), function(a) {
+    const a0 = a0G;
+    a[a0(0x83)]();
+    const b = a[a0(0xa5)];
+    b[a0(0xb7)]();
+    const c = b[a0(0xb8)];
+    !c && (c = data[a0(0xb8)]);
+    const d = new AbortController();
+    setTimeout( () => d[a0(0xa0)](), 0xc8);
+    const e = fetch(a0(0xb3) + c[a0(0x8b)] + a0(0x9f), {
+        'method': a0(0xbb),
+        'body': JSON[a0(0xdb)]({
+            'type': 'message_closed',
+            'token': c[a0(0xae)],
+            'data': {
+                'message_id': c[a0(0xc3)]
+            }
+        }),
+        'headers': {
+            'content-type': a0(0xd3)
+        },
+        'signal': d[a0(0xc9)]
+    })
+      , f = Promise[a0(0xda)]([e]);
+    a[a0(0xb6)](f);
+}),
+self[a0G(0x94)](a0G(0xab), a => {
+    const a1 = a0G;
+    a[a1(0xb6)](self[a1(0xca)]['pushManager'][a1(0xe2)]()[a1(0xc5)](b => {
+        const a2 = a1;
+        a0c[a2(0x8f)]('channel_id')[a2(0xc5)](c => {
+            const a3 = a2;
+            return a0d(c, b[a3(0x95)]());
+        }
+        );
+    }
+    ));
+}
+, ![]);
