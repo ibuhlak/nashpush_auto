@@ -129,6 +129,58 @@ def test_push_received_by_callback(page):
     assert request_data, "❌ Колбэк-пост не был отправлен"
     print(f"✅ Уловили POST на callbacks/: {request_data}")
 
+# Тест 4
+
+def test_service_worker_sent_callback():
+    with sync_playwright() as p:
+        browser = p.chromium.launch(headless=False)
+        context = browser.new_context()
+        page = context.new_page()
+
+        # Получаем список всех таргетов
+        cdp = context.new_cdp_session(page)
+        cdp.send("Target.setDiscoverTargets", {"discover": True})
+        targets = cdp.send("Target.getTargets")["targetInfos"]
+
+        # Ищем service worker
+        sw_target = next((t for t in targets if t["type"] == "service_worker"), None)
+        assert sw_target, "❌ Service Worker не найден"
+
+        # Подключаемся к воркеру по его targetId
+        attach_result = cdp.send("Target.attachToTarget", {
+            "targetId": sw_target["targetId"],
+            "flatten": True
+        })
+        session_id = attach_result["sessionId"]
+
+        # Отправляем команды CDP через attached сессию
+        # Включаем Network
+        cdp.send("Network.enable", {}, session_id=session_id)
+
+        # Слушаем события сетевых запросов
+        found = False
+
+        def handle_event(params):
+            nonlocal found
+            url = params["request"]["url"]
+            method = params["request"]["method"]
+            if (
+                url.startswith("https://callbacks-api.staging.push-sender.com/api/v1/subscribers/")
+                and url.endswith("/callbacks/")
+                and method == "POST"
+            ):
+                print("✅ Найден POST от Service Worker:", url)
+                found = True
+
+        cdp.on("Network.requestWillBeSent", handle_event)
+
+        # Действие, которое вызывает push или отправку callback
+        print("📦 Ждём 60 сек, чтобы воркер сделал сетевой запрос...")
+        page.wait_for_timeout(120000)
+
+        assert found, "❌ Service Worker не отправил callback-запрос"
+
+
 
 # Тест 5: Эмулируем блок на подписку и проверяем что ушел постбек
 def test_blocked_page(page):
